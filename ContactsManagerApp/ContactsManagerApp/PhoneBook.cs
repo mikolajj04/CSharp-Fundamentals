@@ -8,7 +8,21 @@ namespace ContactsManagerApp
 {
     class PhoneBook
     {
-        public List<Contact> Contacts { get; set; }
+
+        private void DisplayContactsDetailList (List<Contact> contacts)
+        {
+
+            int i = 1;
+            foreach (var contact in contacts)
+            {
+
+                Console.WriteLine($"{i}. ");
+                DisplayContactDetails(contact);
+
+                i++;
+            }
+        }
+        public List<Contact> Contacts { get; set; } = new List<Contact>();
         public void AddContact(Contact contact)
         {
             Contacts.Add(contact);
@@ -31,16 +45,16 @@ namespace ContactsManagerApp
         }
         public void ShowAll()
         {
-            int i = 1;
-            foreach (var contact in Contacts)
-            {
-                
-                Console.WriteLine($"{i}. ");
-                DisplayContactDetails(contact);
-
-                i++;
-            }
+            DisplayContactsDetailList(Contacts);
         }
+
+        public void DisplayMatchingContacts(string searchPhrase)
+        {
+            var matchingContacts = Contacts.Where(c => c.Name.Contains(searchPhrase)).ToList();
+            Console.WriteLine($"Contacts matching to '{searchPhrase}': \n");
+            DisplayContactsDetailList(matchingContacts);
+        }
+
 
     }
 }
