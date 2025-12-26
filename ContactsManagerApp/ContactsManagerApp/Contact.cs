@@ -13,8 +13,37 @@ namespace ContactsManagerApp
             Name = name;
             Number = number;
         }
-        public string Name { get; set; }
-        public string Number { get; set; }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new Exception("Invalid name!");
+                }
+                else
+                {
+                    _name = value;
+                }
+            }
+        }
+        private string _number;
+        public string Number {
+            get => _number;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || value.Length < 9)
+                {
+                    throw new Exception("Invalid number!");
+                }
+                else
+                {
+                    _number = value;
+                }
+            }
+        }
 
     }
 }

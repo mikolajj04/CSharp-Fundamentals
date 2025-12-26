@@ -54,6 +54,20 @@ namespace ContactsManagerApp
             Console.WriteLine($"Contacts matching to '{searchPhrase}': \n");
             DisplayContactsDetailList(matchingContacts);
         }
+        public void DeleteContact(string number)
+        {
+            var contactToDelete = Contacts.FirstOrDefault(c => c.Number == number);
+            if (contactToDelete != null)
+            {
+                Console.WriteLine($"Name: {contactToDelete.Name} | Number: {contactToDelete.Number}  has been deleted");
+                Contacts.Remove(contactToDelete);
+
+
+            }
+            else { 
+            Console.WriteLine("Contact not found!");
+            }
+        }
 
 
     }
